@@ -124,7 +124,7 @@
         android:id="@+id/developed_by"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="developed by topncharted"
+        android:text="developed by topNcharted"
         android:textColor="#F7F7F7"
         android:textSize="17sp"
         android:fontFamily="sans-serif"

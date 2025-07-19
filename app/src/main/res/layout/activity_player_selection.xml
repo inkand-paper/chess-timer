@@ -58,6 +58,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="Player 1 Name"
+                            android:imeOptions="actionNext"
+                            android:inputType="textPersonName"
+                            android:maxLines="1"
                             android:textColor="#1E2A38" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,8 +79,11 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/player2Input"
                             android:layout_width="match_parent"
+                            android:imeOptions="actionNext"
                             android:layout_height="wrap_content"
                             android:hint="Player 2 Name"
+                            android:inputType="textPersonName"
+                            android:maxLines="1"
                             android:textColor="#1E2A38" />
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,6 +105,8 @@
                             android:layout_height="wrap_content"
                             android:hint="Match Time (minutes)"
                             android:inputType="number"
+                            android:imeOptions="actionGo"
+                            android:maxLines="1"
                             android:textColor="#1E2A38" />
                     </com.google.android.material.textfield.TextInputLayout>
 

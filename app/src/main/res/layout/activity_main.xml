@@ -8,18 +8,17 @@
     tools:context=".MainActivity">
 
 
-
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/CardView1"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:rotation="180"
         app:cardBackgroundColor="#1E2A38"
         app:cardCornerRadius="0dp"
-        android:rotation="180"
+        app:layout_constraintBottom_toTopOf="@id/CardView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/CardView2"
         app:strokeColor="@null"
         app:strokeWidth="0dp">
 
@@ -60,27 +59,38 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
-
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/check"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                app:cardElevation="8dp"
-                android:elevation="8dp"
                 android:id="@+id/InnerCardView2"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="30dp"
                 android:layout_marginStart="8dp"
+                android:elevation="8dp"
                 app:cardBackgroundColor="#2C2F33"
                 app:cardCornerRadius="5dp"
+                app:cardElevation="8dp"
                 app:layout_constraintBottom_toTopOf="@id/InnerCardView1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:padding="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/Fab1"
@@ -93,16 +103,17 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:rippleColor="#66FFFFFF" />
+
                     <TextView
                         android:id="@+id/Fab1TV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pause"
-                        android:textSize="10sp"
                         android:textColor="#C5C6C7"
-                        app:layout_constraintTop_toBottomOf="@id/Fab1"
+                        android:textSize="10sp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintTop_toBottomOf="@id/Fab1" />
 
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -116,38 +127,40 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/Fab1"
                         app:rippleColor="#66FFFFFF" />
+
                     <TextView
                         android:id="@+id/Fab2TV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Stop"
-                        android:textSize="10sp"
                         android:textColor="#C5C6C7"
-                        app:layout_constraintTop_toBottomOf="@id/Fab2"
+                        android:textSize="10sp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintTop_toBottomOf="@id/Fab2" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
-                android:visibility="gone"
-                app:cardElevation="8dp"
-                android:elevation="8dp"
                 android:id="@+id/InnerCardViewForRetry1"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="30dp"
                 android:layout_marginStart="8dp"
+                android:elevation="8dp"
+                android:visibility="gone"
                 app:cardBackgroundColor="#2C2F33"
                 app:cardCornerRadius="5dp"
+                app:cardElevation="8dp"
                 app:layout_constraintBottom_toTopOf="@id/InnerCardView1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:padding="10dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/FabRetry1"
@@ -155,21 +168,22 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="#A2A78F"
                         android:src="@drawable/restart"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:rippleColor="#66FFFFFF" />
+
                     <TextView
                         android:id="@+id/FabRetry1TV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Play"
-                        android:textSize="10sp"
+                        android:text="Restart"
                         android:textColor="#C5C6C7"
-                        app:layout_constraintTop_toBottomOf="@id/FabRetry1"
+                        android:textSize="10sp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintTop_toBottomOf="@id/FabRetry1" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -177,6 +191,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/CardView2"
         android:layout_width="match_parent"
@@ -227,27 +242,39 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/check"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                app:cardElevation="8dp"
-                android:elevation="8dp"
                 android:id="@+id/InnerCardView4"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="30dp"
                 android:layout_marginStart="8dp"
+                android:elevation="8dp"
                 app:cardBackgroundColor="#1E2A38"
                 app:cardCornerRadius="5dp"
+                app:cardElevation="8dp"
                 app:layout_constraintBottom_toTopOf="@id/InnerCardView3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:padding="10dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/Fab3"
@@ -260,16 +287,17 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:rippleColor="#66FFFFFF" />
+
                     <TextView
                         android:id="@+id/Fab3TV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Pause"
-                        android:textSize="10sp"
                         android:textColor="#C5C6C7"
-                        app:layout_constraintTop_toBottomOf="@id/Fab3"
+                        android:textSize="10sp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintTop_toBottomOf="@id/Fab3" />
 
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -283,39 +311,41 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/Fab3"
                         app:rippleColor="#66FFFFFF" />
+
                     <TextView
                         android:id="@+id/Fab4TV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Stop"
-                        android:textSize="10sp"
                         android:textColor="#C5C6C7"
-                        app:layout_constraintTop_toBottomOf="@id/Fab4"
+                        android:textSize="10sp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintTop_toBottomOf="@id/Fab4" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+
             <androidx.cardview.widget.CardView
 
-                android:visibility="gone"
-                app:cardElevation="8dp"
-                android:elevation="8dp"
                 android:id="@+id/InnerCardViewForRetry2"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="30dp"
                 android:layout_marginStart="8dp"
+                android:elevation="8dp"
+                android:visibility="gone"
                 app:cardBackgroundColor="#1E2A38"
                 app:cardCornerRadius="5dp"
+                app:cardElevation="8dp"
                 app:layout_constraintBottom_toTopOf="@id/InnerCardView3"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:padding="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:padding="10dp">
 
                     <com.google.android.material.floatingactionbutton.FloatingActionButton
                         android:id="@+id/FabRetry2"
@@ -323,21 +353,22 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="#A2A78F"
                         android:src="@drawable/restart"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:rippleColor="#66FFFFFF" />
+
                     <TextView
+                        android:id="@+id/FabRetry2TV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Play"
-                        android:id="@+id/FabRetry2TV"
-                        android:textSize="10sp"
+                        android:text="Restart"
                         android:textColor="#C5C6C7"
-                        app:layout_constraintTop_toBottomOf="@id/FabRetry2"
+                        android:textSize="10sp"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+                        app:layout_constraintTop_toBottomOf="@id/FabRetry2" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -345,4 +376,80 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:visibility="gone"
+        android:id="@+id/CardView3"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="20dp"
+        app:cardBackgroundColor="#324144"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toTopOf="@id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guideline">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:id="@+id/RulesTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rules"
+                    android:textColor="#E0E0E0"
+                    android:textSize="28dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/Rules"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Rules goes here"
+                    android:textColor="#E0E0E0"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/RulesTitle"
+                    app:layout_constraintTop_toBottomOf="@id/RulesTitle" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/StartBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="#A2A78F"
+                    android:text="Start"
+                    android:textColor="#E0E0E0"
+                    app:cornerRadius="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/Rules" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.135" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.865" />
 </androidx.constraintlayout.widget.ConstraintLayout>
