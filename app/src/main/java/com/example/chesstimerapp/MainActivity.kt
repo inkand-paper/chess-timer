@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var name2: String
     private var warningPlayedP1 = false
     private var warningPlayedP2 = false
+    private var mediaPlayer: MediaPlayer? = null
     private val player1Moves = mutableListOf<String>()
     private val player2Moves = mutableListOf<String>()
 
@@ -166,6 +167,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.N)
     private fun switchPlayer() {
         timer?.cancel()
+        mediaPlayer?.pause()
         val currentPlayerTimeMillis =
             if (activePlayer == 1) player1TimeMillis else player2TimeMillis
         val minutes = (currentPlayerTimeMillis / 1000) / 60
@@ -178,12 +180,22 @@ class MainActivity : AppCompatActivity() {
             player2Moves.add(formattedTime)
         }
         activePlayer = if (activePlayer == 1) 2 else 1
+
+
+        val newTimeMillis = if (activePlayer == 1) player1TimeMillis else player2TimeMillis
+        if (newTimeMillis <= 30_000L) {
+            playWarningSound()
+        }
         updateUI()
         startTimer()
     }
 
     @SuppressLint("SetTextI18n")
     private fun resetTimers(time: Long) {
+        mediaPlayer?.stop()
+        mediaPlayer?.release()
+        mediaPlayer = null
+
         player1TimeMillis = time
         player2TimeMillis = time
         activePlayer = 1
@@ -192,6 +204,16 @@ class MainActivity : AppCompatActivity() {
         binding.Fab3.setImageResource(R.drawable.pause)
         binding.Fab1TV.text = "Pause"
         binding.Fab3TV.text = "Pause"
+        binding.InnerCardView1.setBackgroundColor(
+            ContextCompat.getColor(
+                this@MainActivity, R.color.cardbg
+            )
+        )
+        binding.InnerCardView3.setBackgroundColor(
+            ContextCompat.getColor(
+                this@MainActivity, R.color.cardbg
+            )
+        )
         binding.apply {
             InnerCardView2.visibility = View.VISIBLE
             InnerCardView4.visibility = View.VISIBLE
@@ -216,6 +238,8 @@ class MainActivity : AppCompatActivity() {
     private fun pauseTimer() {
         isPaused = true
         timer?.cancel()
+        mediaPlayer?.pause()
+
         if (activePlayer == 1) {
             binding.Fab1.setImageResource(R.drawable.play)
             binding.Fab1TV.text = "Play"
@@ -229,6 +253,10 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun resumeTimer() {
         isPaused = false
+        val timeLeft = if (activePlayer == 1) player1TimeMillis else player2TimeMillis
+        if (timeLeft <= 30_000L) {
+            playWarningSound()
+        }
         startTimer()
         if (activePlayer == 1) {
             binding.Fab1.setImageResource(R.drawable.pause)
@@ -240,11 +268,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun playWarningSound() {
-        val mediaPlayer = MediaPlayer.create(this, R.raw.timer_warning)
-        mediaPlayer.start()
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.timer_warning)
+            mediaPlayer?.isLooping = true
+            mediaPlayer?.start()
+        } else if (!mediaPlayer!!.isPlaying) {
+            mediaPlayer?.start()
+        }
+    }
 
-        mediaPlayer.setOnCompletionListener {
-            it.release()
+    private fun playClickSound() {
+        if (mediaPlayer == null) {
+            mediaPlayer = MediaPlayer.create(this, R.raw.click)
+            mediaPlayer?.isLooping = true
+            mediaPlayer?.start()
+        } else if (!mediaPlayer!!.isPlaying) {
+            mediaPlayer?.start()
         }
     }
 
@@ -265,8 +304,7 @@ class MainActivity : AppCompatActivity() {
                         warningPlayedP1 = true
                         binding.InnerCardView1.setBackgroundColor(
                             ContextCompat.getColor(
-                                this@MainActivity,
-                                R.color.warningColor
+                                this@MainActivity, R.color.warningColor
                             )
                         )
                     }
@@ -277,8 +315,7 @@ class MainActivity : AppCompatActivity() {
                         warningPlayedP2 = true
                         binding.InnerCardView3.setBackgroundColor(
                             ContextCompat.getColor(
-                                this@MainActivity,
-                                R.color.warningColor
+                                this@MainActivity, R.color.warningColor
                             )
                         )
                     }
@@ -288,6 +325,10 @@ class MainActivity : AppCompatActivity() {
 
             @SuppressLint("SetTextI18n")
             override fun onFinish() {
+                mediaPlayer?.stop()
+                mediaPlayer?.release()
+                mediaPlayer = null
+
                 if (activePlayer == 1) {
                     player1TimeMillis = 0
                     binding.Time1.text = "Time's up!"
@@ -302,12 +343,10 @@ class MainActivity : AppCompatActivity() {
                 binding.InnerCardView3.isEnabled = false
                 binding.InnerCardView1.isClickable = false
                 binding.InnerCardView3.isClickable = false
-                AlertDialog.Builder(this@MainActivity)
-                    .setTitle("Game Over")
+                AlertDialog.Builder(this@MainActivity).setTitle("Game Over")
                     .setMessage("Player ${if (activePlayer == 1) name1 else name2} lost! Do you want to restart?")
                     .setPositiveButton("Yes") { _, _ -> resetTimers(totalTimeMillis) }
-                    .setNegativeButton("No", null)
-                    .show()
+                    .setNegativeButton("No", null).show()
 
 
             }

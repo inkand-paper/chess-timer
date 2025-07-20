@@ -3,5 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="warningColor">#FF6347</color> <!-- Tomato red, or any alert color -->
-
+    <color name="cardbg">#60FFFFFF</color>
 </resources>
