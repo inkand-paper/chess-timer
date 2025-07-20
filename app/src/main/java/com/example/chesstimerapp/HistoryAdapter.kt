@@ -5,15 +5,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chesstimerapp.databinding.ItemListBinding
-import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.Locale
 
-class HistoryAdapter(private val moveList: List<String>): RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
-    inner class HistoryViewHolder(val binding: ItemListBinding): RecyclerView.ViewHolder(binding.root)
+class HistoryAdapter(private val moveList: List<String>) :
+    RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
+    inner class HistoryViewHolder(val binding: ItemListBinding) :
+        RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
-        val binding = ItemListBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = ItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return HistoryViewHolder(binding)
     }
 

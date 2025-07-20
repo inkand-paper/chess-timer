@@ -2,23 +2,17 @@ package com.example.chesstimerapp
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.icu.text.SimpleDateFormat
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.example.chesstimerapp.databinding.ActivityMainBinding
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.button.MaterialButton
-import java.util.Date
-import java.util.Locale
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -36,6 +30,7 @@ class MainActivity : AppCompatActivity() {
     private val player2Moves = mutableListOf<String>()
 
     private var timer: CountDownTimer? = null
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,20 +45,20 @@ class MainActivity : AppCompatActivity() {
         player1TimeMillis = totalTimeMillis
         player2TimeMillis = totalTimeMillis
         binding.Name1.setOnClickListener {
-            val intent = Intent(this, history::class.java)
+            val intent = Intent(this, History::class.java)
             intent.putExtra("playerName", name1)
             intent.putStringArrayListExtra("moveTimes", ArrayList(player1Moves))
             startActivity(intent)
         }
 
         binding.Name2.setOnClickListener {
-            val intent = Intent(this, history::class.java)
+            val intent = Intent(this, History::class.java)
             intent.putExtra("playerName", name2)
             intent.putStringArrayListExtra("moveTimes", ArrayList(player2Moves))
             startActivity(intent)
         }
 
-       showStartCard()
+        showStartCard()
 
     }
 
@@ -123,7 +118,7 @@ class MainActivity : AppCompatActivity() {
 
 
     @RequiresApi(Build.VERSION_CODES.N)
-    private fun gameSetUp(){
+    private fun gameSetUp() {
         updateUI()
         binding.apply {
             Fab1.setOnClickListener {
@@ -167,10 +162,12 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    @SuppressLint("DefaultLocale")
     @RequiresApi(Build.VERSION_CODES.N)
     private fun switchPlayer() {
         timer?.cancel()
-        val currentPlayerTimeMillis = if (activePlayer == 1) player1TimeMillis else player2TimeMillis
+        val currentPlayerTimeMillis =
+            if (activePlayer == 1) player1TimeMillis else player2TimeMillis
         val minutes = (currentPlayerTimeMillis / 1000) / 60
         val seconds = (currentPlayerTimeMillis / 1000) % 60
         val formattedTime = String.format("%02d:%02d", minutes, seconds)
@@ -185,6 +182,7 @@ class MainActivity : AppCompatActivity() {
         startTimer()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun resetTimers(time: Long) {
         player1TimeMillis = time
         player2TimeMillis = time
@@ -265,19 +263,30 @@ class MainActivity : AppCompatActivity() {
                     if (secondsLeft == 30L && !warningPlayedP1) {
                         playWarningSound()
                         warningPlayedP1 = true
-                        binding.InnerCardView1.setBackgroundColor(ContextCompat.getColor(this@MainActivity,R.color.warningColor))
+                        binding.InnerCardView1.setBackgroundColor(
+                            ContextCompat.getColor(
+                                this@MainActivity,
+                                R.color.warningColor
+                            )
+                        )
                     }
                 } else {
                     player2TimeMillis = millisUntilFinished
                     if (secondsLeft == 30L && !warningPlayedP2) {
                         playWarningSound()
                         warningPlayedP2 = true
-                        binding.InnerCardView3.setBackgroundColor(ContextCompat.getColor(this@MainActivity,R.color.warningColor))
+                        binding.InnerCardView3.setBackgroundColor(
+                            ContextCompat.getColor(
+                                this@MainActivity,
+                                R.color.warningColor
+                            )
+                        )
                     }
                 }
                 updateTimerUI()
             }
 
+            @SuppressLint("SetTextI18n")
             override fun onFinish() {
                 if (activePlayer == 1) {
                     player1TimeMillis = 0
@@ -297,7 +306,7 @@ class MainActivity : AppCompatActivity() {
                     .setTitle("Game Over")
                     .setMessage("Player ${if (activePlayer == 1) name1 else name2} lost! Do you want to restart?")
                     .setPositiveButton("Yes") { _, _ -> resetTimers(totalTimeMillis) }
-                    .setNegativeButton("No",null)
+                    .setNegativeButton("No", null)
                     .show()
 
 
@@ -305,6 +314,7 @@ class MainActivity : AppCompatActivity() {
         }.start()
     }
 
+    @SuppressLint("SetTextI18n")
     private fun updateUI() {
         updateTimerUI()
 

@@ -1,14 +1,11 @@
 package com.example.chesstimerapp
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chesstimerapp.databinding.ActivityHistoryBinding
 
-class history : AppCompatActivity() {
+class History : AppCompatActivity() {
     private lateinit var binding: ActivityHistoryBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
